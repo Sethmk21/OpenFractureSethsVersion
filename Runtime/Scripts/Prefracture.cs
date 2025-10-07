@@ -36,7 +36,7 @@ public class Prefracture : MonoBehaviour
     /// Compute the fracture and create the fragments
     /// </summary>
     /// <returns></returns>
-    [ExecuteInEditMode] 
+
     [ContextMenu("Prefracture")]
     public void ComputeFracture()
     {
@@ -52,12 +52,15 @@ public class Prefracture : MonoBehaviour
             {
                 // Create a game object to contain the fragments
                 this.fragmentRoot = new GameObject($"{this.name}Fragments");
-                this.fragmentRoot.transform.SetParent(this.transform.parent);
+                this.fragmentRoot.transform.SetParent(this.transform);
 
                 // Each fragment will handle its own scale
                 this.fragmentRoot.transform.position = this.transform.position;
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
+                this.fragmentRoot.tag = this.tag;
+                this.fragmentRoot.layer = this.gameObject.layer;
+                this.fragmentRoot.SetActive(false);
             }            
 
             var fragmentTemplate = CreateFragmentTemplate();
@@ -73,7 +76,7 @@ public class Prefracture : MonoBehaviour
             GameObject.DestroyImmediate(fragmentTemplate);
                 
             // Deactivate the original object
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
 
             // Fire the completion callback
             if (callbackOptions.onCompleted != null)
