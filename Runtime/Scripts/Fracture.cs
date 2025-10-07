@@ -63,7 +63,7 @@ public class Fracture : MonoBehaviour
             }
         }
     }
-
+    /*
     void OnCollisionEnter(Collision collision)
     {
         if (triggerOptions.triggerType == TriggerType.Collision)
@@ -88,7 +88,8 @@ public class Fracture : MonoBehaviour
             }
         }
     }
-
+    */
+    /*
     void OnTriggerEnter(Collider collider)
     {
         if (triggerOptions.triggerType == TriggerType.Trigger)
@@ -103,7 +104,8 @@ public class Fracture : MonoBehaviour
             }
         }
     }
-
+    */
+    /*
     void Update()
     {
         if (triggerOptions.triggerType == TriggerType.Keyboard)
@@ -115,12 +117,12 @@ public class Fracture : MonoBehaviour
             }
         }
     }
-
+    */
     /// <summary>
     /// Compute the fracture and create the fragments
     /// </summary>
     /// <returns></returns>
-    private void ComputeFracture()
+    public void ComputeFracture()
     {
         var mesh = this.GetComponent<MeshFilter>().sharedMesh;
 
@@ -131,12 +133,15 @@ public class Fracture : MonoBehaviour
             {
                 // Create a game object to contain the fragments
                 this.fragmentRoot = new GameObject($"{this.name}Fragments");
-                this.fragmentRoot.transform.SetParent(this.transform.parent);
+                this.fragmentRoot.transform.SetParent(this.transform);
 
                 // Each fragment will handle its own scale
                 this.fragmentRoot.transform.position = this.transform.position;
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
+                this.fragmentRoot.tag = this.tag;
+                this.fragmentRoot.layer = this.gameObject.layer;
+                this.fragmentRoot.SetActive(false);
             }
 
             var fragmentTemplate = CreateFragmentTemplate();
@@ -154,7 +159,7 @@ public class Fracture : MonoBehaviour
                         GameObject.Destroy(fragmentTemplate);
 
                         // Deactivate the original object
-                        this.gameObject.SetActive(false);
+                        //this.gameObject.SetActive(false);
 
                         // Fire the completion callback
                         if ((this.currentRefractureCount == 0) ||
@@ -179,7 +184,7 @@ public class Fracture : MonoBehaviour
                 GameObject.Destroy(fragmentTemplate);
 
                 // Deactivate the original object
-                this.gameObject.SetActive(false);
+                // this.gameObject.SetActive(false);
 
                 // Fire the completion callback
                 if ((this.currentRefractureCount == 0) ||
