@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -243,8 +244,9 @@ public static class Fragmenter
             fragment.name = $"Fragment{i}";
             fragment.transform.localPosition = Vector3.zero;
             fragment.transform.localRotation = Quaternion.identity;
+            fragment.layer = 6; // Set layer to "Destructible"
             fragment.transform.localScale = sourceObject.transform.localScale;
-
+            fragment.transform.localScale = new Vector3(1, 1, 1);
             meshes[k].name = System.Guid.NewGuid().ToString();
 
             // Update mesh to the new sliced mesh
@@ -261,7 +263,7 @@ public static class Fragmenter
             // Compute mass of the sliced object by dividing mesh bounds by density
             var parentRigidBody = sourceObject.GetComponent<Rigidbody>();
             var rigidBody = fragment.GetComponent<Rigidbody>();
-
+            rigidBody.includeLayers = parentRigidBody.includeLayers;
             var size = fragmentMesh.bounds.size;
             float density = (parentSize.x * parentSize.y * parentSize.z) / parentMass;
             rigidBody.mass = (size.x * size.y * size.z) / density;
