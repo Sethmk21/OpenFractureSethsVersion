@@ -59,7 +59,7 @@ public class Prefracture : MonoBehaviour
                 this.fragmentRoot.transform.rotation = this.transform.rotation;
                 this.fragmentRoot.transform.localScale = Vector3.one;
                 this.fragmentRoot.tag = this.tag;
-                this.fragmentRoot.layer = this.gameObject.layer;
+                this.fragmentRoot.layer = 6;
                 this.fragmentRoot.SetActive(false);
             }            
 
