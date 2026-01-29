@@ -27,7 +27,7 @@ public class Prefracture : MonoBehaviour
             var scale = this.transform.parent.localScale;
             if ((scale.x != scale.y) || (scale.x != scale.z) || (scale.y != scale.z))
             {
-                Debug.LogWarning($"Warning: Parent transform of fractured object must be uniformly scaled in all axes or fragments will not render correctly.", this.transform);
+                //Debug.LogWarning($"Warning: Parent transform of fractured object must be uniformly scaled in all axes or fragments will not render correctly.", this.transform);
             }
         }
     }
